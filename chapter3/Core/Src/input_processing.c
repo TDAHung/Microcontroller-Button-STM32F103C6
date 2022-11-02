@@ -14,7 +14,7 @@ typedef enum {
 } TimerMilArrayAccess;
 const unsigned int NO_OF_MIL_TIMERS = 2;
 const unsigned int NO_OF_SEC_TIMERS = 2;
-const unsigned int scanTime = 250;
+const unsigned int scanTime = 200;
 const unsigned int blinkTime = 200;
 
 // LED parameter
@@ -113,17 +113,17 @@ void fsm_for_traffic_control(void) {
 	case PLUS_RED:
 	case PLUS_GREEN:
 	case PLUS_YELLOW:
-		setBufferLed7(traffic_time_update[trafficMode-1], 2);
+		setBufferLed7(traffic_time[trafficMode-1]-1, 2);
 		blinkTraffic();
 		break;
 	case MINUS_RED:
 	case MINUS_GREEN:
 	case MINUS_YELLOW:
-		setBufferLed7(traffic_time_update[trafficMode-4], 3);
+		setBufferLed7(traffic_time[trafficMode-4]-1, 3);
 		blinkTraffic();
 		break;
 	case CONFIRM:
-		setBufferLed7(4, 4);
+		setBufferLed7(44, 44);
 		blinkTraffic();
 		break;
 	}
@@ -204,25 +204,28 @@ void increase(uint8_t* buffer) {
 	case PLUS_RED:
 		if(buffer[VER_GREEN]-1 > 0 && buffer[HOR_RED]-1 > 1) {
 			buffer[VER_RED]++;
-			buffer[VER_GREEN]--;
+			buffer[VER_GREEN]++;
 
-			buffer[HOR_RED]--;
+			buffer[HOR_RED]++;
 			buffer[HOR_GREEN]++;
 		}
 		break;
 	case PLUS_GREEN:
 		if(buffer[VER_RED]-1 > 1 && buffer[HOR_GREEN]-1 > 0) {
 			buffer[VER_GREEN]++;
-			buffer[VER_RED]--;
+			buffer[VER_RED]++;
 
-			buffer[HOR_GREEN]--;
+			buffer[HOR_GREEN]++;
 			buffer[HOR_RED]++;
 		}
 		break;
 	case PLUS_YELLOW:
 		if(buffer[VER_GREEN]-1 > 0) {
 			buffer[VER_YELLOW]++;
-			buffer[VER_GREEN]--;
+			buffer[VER_RED]++;
+
+			buffer[HOR_YELLOW]++;
+			buffer[HOR_RED]++;
 		}
 		break;
 	default:
@@ -235,25 +238,28 @@ void decrease(uint8_t* buffer) {
 	case MINUS_RED:
 		if(buffer[VER_RED]-1 > 1 && buffer[VER_GREEN]-1 > 0) {
 			buffer[VER_RED]--;
-			buffer[VER_GREEN]++;
+			buffer[VER_GREEN]--;
 
-			buffer[HOR_RED]++;
+			buffer[HOR_RED]--;
 			buffer[HOR_GREEN]--;
 		}
 		break;
 	case MINUS_GREEN:
 		if(buffer[VER_GREEN]-1 > 0 && buffer[HOR_RED]-1 > 1) {
 			buffer[VER_GREEN]--;
-			buffer[VER_RED]++;
+			buffer[VER_RED]--;
 
-			buffer[HOR_GREEN]++;
+			buffer[HOR_GREEN]--;
 			buffer[HOR_RED]--;
 		}
 		break;
 	case MINUS_YELLOW:
 		if(buffer[VER_YELLOW]-1 > 0) {
 			buffer[VER_YELLOW]--;
-			buffer[VER_GREEN]++;
+			buffer[VER_RED]--;
+
+			buffer[HOR_YELLOW]--;
+			buffer[HOR_RED]--;
 		}
 		break;
 	default:
