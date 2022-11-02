@@ -1,0 +1,6 @@
+traffic.c:34:6:copyArray	32	static
+traffic.c:49:6:init_traffic	24	static
+traffic.c:69:6:traffic_display	8	static
+traffic.c:161:6:clearTraffic	8	static
+traffic.c:173:9:getUpdateFlag	4	static
+traffic.c:180:6:updateNextPeriod	4	static

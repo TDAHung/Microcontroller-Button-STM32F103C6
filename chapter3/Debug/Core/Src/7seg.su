@@ -1,0 +1,2 @@
+7seg.c:45:6:init_led7	24	static
+7seg.c:63:6:display_7SEG	32	static

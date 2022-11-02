@@ -1,0 +1,9 @@
+input_processing.c:67:6:init_fsm_input_processing	24	static
+input_processing.c:89:6:fsm_for_input_processing	16	static
+input_processing.c:107:6:fsm_for_traffic_control	16	static
+input_processing.c:133:6:process	16	static
+input_processing.c:181:6:setBufferLed7	16	static
+input_processing.c:188:6:scanLed7	8	static
+input_processing.c:202:6:increase	16	static
+input_processing.c:233:6:decrease	16	static
+input_processing.c:265:6:blinkTraffic	8	static
